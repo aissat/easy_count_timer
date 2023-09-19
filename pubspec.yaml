@@ -1,10 +1,11 @@
 name: easy_count_timer
 description: It is a simple customizable timer for counting [`up`/`down`] a given time with any Custom TextStyle.
-version: 0.0.1
-# homepage:
+version: 0.0.1-dev
+homepage: https://github.com/aissat/easy_count_timer
+repository: https://github.com/aissat/easy_count_timer
 
 environment:
-  sdk: ">=3.1.2 <4.0.0"
+  sdk: ">=3.1.1 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
