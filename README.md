@@ -1,5 +1,6 @@
 
-```easy_count_timer``` is a Flutter package that provides a Timer functionality and is a fork of [`flutter_timer_countdown`](https://pub.dev/packages/flutter_timer_countdown) ✨
+```easy_count_timer``` is a Flutter package that provides a Timer functionality and is a fork of [`flutter_timer_countdown`](https://pub.dev/packages/flutter_timer_countdown)
+✨
 
 It is a simple customizable timer for counting [`up`/`down`] a given time with any Custom TextStyle.
 
@@ -17,6 +18,7 @@ We build this package because we wanted to:
 ## ❗NEW  Features ❗
 
 ### Customizable space between number units and colons
+
 With the parameter ```spacerWidth``` you can now define the size of the space between number units and colons. The default is set to ```10``` (double).
 
 ## Show Cases
@@ -29,21 +31,24 @@ Show only the time units you want to...
 
 Show only days, hours, minutes, seconds...
 
-<img src="https://github.com/appinioGmbH/flutter_packages/blob/main/assets/timer_countdown/days.png?raw=true" height="200"> <img src="https://github.com/appinioGmbH/flutter_packages/blob/main/assets/timer_countdown/hours.png?raw=true" height="200"> 
+<img src="https://github.com/appinioGmbH/flutter_packages/blob/main/assets/timer_countdown/days.png?raw=true" height="200"> <img src="https://github.com/appinioGmbH/flutter_packages/blob/main/assets/timer_countdown/hours.png?raw=true" height="200">
 
 <img src="https://github.com/appinioGmbH/flutter_packages/blob/main/assets/timer_countdown/minutes.png?raw=true" height="200"> <img src="https://github.com/appinioGmbH/flutter_packages/blob/main/assets/timer_countdown/seconds.gif?raw=true" height="200" />
-
 
 ## Installation
 
 Create a new project with the command
+
 ```yaml
 flutter create MyApp
 ```
+
 Add
+
 ```yaml
 flutter_timer_countdown: ...
 ```
+
 to your `pubspec.yaml` of your flutter project.
 **OR**
 run
@@ -51,8 +56,8 @@ run
 ```yaml
 flutter pub add flutter_timer_countdown
 ```
-in your project's root directory.
 
+in your project's root directory.
 
 In your library add the following import:
 
@@ -63,8 +68,8 @@ import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 For help getting started with Flutter, view the online [documentation](https://flutter.io/).
 
 ## Usage
-You can place your `TimerCountdown` inside of a `Scaffold` or `CupertinoPageScaffold` like we did here. Optional parameters can be defined to enable different features. See the following example..
 
+You can place your `TimerCountdown` inside of a `Scaffold` or `CupertinoPageScaffold` like we did here. Optional parameters can be defined to enable different features. See the following example..
 
 ```dart
 import 'package:easy_count_timer/easy_count_timer.dart';
@@ -150,11 +155,9 @@ class CounterDownTimer extends StatelessWidget {
 }
 ```
 
-
-
 ## Constructor
-#### Basic
 
+#### Basic
 
 | Parameter        | Default           | Description  | Required  |
 | ------------- |:-------------|:-----|:-----:|
@@ -170,7 +173,3 @@ class CounterDownTimer extends StatelessWidget {
 | minutesDescription      | Minutes | Minutes unit description | false
 | secondsDescription      | Seconds | Seconds unit description | false
 | spacerWidth      | 10 | Defines the width between the colons and the units | false
-
-
-<hr/>
-Made with ❤ by Flutter team at <a href="https://appinio.com">Appinio GmbH</a>

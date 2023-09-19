@@ -1,5 +1,5 @@
 name: easy_count_timer
-description: A new Flutter package project.
+description: It is a simple customizable timer for counting [`up`/`down`] a given time with any Custom TextStyle.
 version: 0.0.1
 # homepage:
 

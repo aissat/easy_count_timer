@@ -290,6 +290,7 @@ class _CountTimerState extends State<CountTimer> {
         timeTextStyle: widget.colonsTextStyle,
         description: '',
         descriptionTextStyle: widget.descriptionTextStyle,
+        enableDescriptions: widget.enableDescriptions,
       ),
     );
   }
