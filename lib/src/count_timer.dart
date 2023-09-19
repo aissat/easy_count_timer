@@ -162,7 +162,6 @@ class CountTimer extends StatefulWidget {
 }
 
 class _CountTimerState extends State<CountTimer> {
-  Timer? timer;
   late String countdownDays;
   late String countdownHours;
   late String countdownMinutes;
@@ -198,10 +197,7 @@ class _CountTimerState extends State<CountTimer> {
 
   @override
   void dispose() {
-    if (timer != null) {
-      timer!.cancel();
-    }
-    widget.controller.dispose();
+    // widget.controller.dispose();
     super.dispose();
   }
 
@@ -259,8 +255,9 @@ class _CountTimerState extends State<CountTimer> {
         widget.format == CountTimerFormat.hoursMinutes ||
         widget.format == CountTimerFormat.hoursOnly) {
       return _twoDigits(duration.inHours, "hours");
-    } else
+    } else {
       return _twoDigits(duration.inHours.remainder(24), "hours").toString();
+    }
   }
 
   /// Convert [Duration] in minutes to String for UI.
@@ -268,16 +265,18 @@ class _CountTimerState extends State<CountTimer> {
     if (widget.format == CountTimerFormat.minutesSeconds ||
         widget.format == CountTimerFormat.minutesOnly) {
       return _twoDigits(duration.inMinutes, "minutes");
-    } else
+    } else {
       return _twoDigits(duration.inMinutes.remainder(60), "minutes");
+    }
   }
 
   /// Convert [Duration] in seconds to String for UI.
   String _durationToStringSeconds(Duration duration) {
     if (widget.format == CountTimerFormat.secondsOnly) {
       return _twoDigits(duration.inSeconds, "seconds");
-    } else
+    } else {
       return _twoDigits(duration.inSeconds.remainder(60), "seconds");
+    }
   }
 
   /// Builds the UI colons between the time units.
