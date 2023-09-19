@@ -30,6 +30,8 @@ class CountTimerController extends ChangeNotifier {
 
   bool _isEnd = false;
 
+  bool get isActive => _timer != null && _timer!.isActive;
+
   Duration get duration => _duration;
   bool get isEnd {
     assert(endTime == null, 'endTime must be null to get isEnd');
@@ -43,6 +45,9 @@ class CountTimerController extends ChangeNotifier {
       _duration = endTime!.difference(DateTime.now());
     }
 
+    if (_timer != null &&
+        (_timer!.isActive || (!_timer!.isActive && _duration > Duration.zero)))
+      return;
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (endTime != null) {
         _duration = endTime!.difference(DateTime.now());
@@ -60,10 +65,10 @@ class CountTimerController extends ChangeNotifier {
 
   void start() {
     assert(endTime == null, 'endTime must be null to start');
+    if (_timer != null) return;
     if (_timer == null || !_timer!.isActive) {
       _startTimer();
     }
-    notifyListeners();
   }
 
   void stop() {
@@ -77,6 +82,16 @@ class CountTimerController extends ChangeNotifier {
   }
 
   void reset() {
+    assert(endTime == null, 'endTime must be null to reset');
+    _duration = Duration.zero;
+    _pause = Duration.zero;
+    if (_timer != null) {
+      _timer?.cancel();
+    }
+    notifyListeners();
+  }
+
+  void restart() {
     assert(endTime == null, 'endTime must be null to reset');
     _duration = Duration.zero;
     _pause = Duration.zero;
@@ -172,6 +187,7 @@ class _CountTimerState extends State<CountTimer> {
   void initState() {
     widget.controller._startTimer();
     difference = widget.controller.duration;
+    print(difference);
     widget.controller.addListener(() {
       if (mounted) {
         setState(() {
@@ -198,6 +214,8 @@ class _CountTimerState extends State<CountTimer> {
   @override
   void dispose() {
     // widget.controller.dispose();
+    print(widget.controller.duration);
+
     super.dispose();
   }
 
