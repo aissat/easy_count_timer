@@ -52,7 +52,7 @@ class _CounterUpTimerState extends State<CounterUpTimer> {
               icon: const Icon(Icons.play_arrow_rounded)),
           IconButton(
               onPressed: () {
-                controller.puase();
+                controller.pause();
               },
               icon: const Icon(Icons.pause_rounded)),
           IconButton(

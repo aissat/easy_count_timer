@@ -10,6 +10,8 @@ Supporting Android, iOS & WebApp.
 
 We build this package because we wanted to:
 
+- be able use count timer up/down easily
+- `CountTimerController` to controll timer `stop`, `puase` ...
 - have simple timer
 - customize timer textstyles
 - choose the timer description
@@ -46,7 +48,7 @@ flutter create MyApp
 Add
 
 ```yaml
-flutter_timer_countdown: ...
+easy_count_timer: ...
 ```
 
 to your `pubspec.yaml` of your flutter project.
@@ -54,7 +56,7 @@ to your `pubspec.yaml` of your flutter project.
 run
 
 ```yaml
-flutter pub add flutter_timer_countdown
+flutter pub add easy_count_timer
 ```
 
 in your project's root directory.
@@ -62,14 +64,14 @@ in your project's root directory.
 In your library add the following import:
 
 ```dart
-import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
+import 'package:easy_count_timer/easy_count_timer.dart';
 ```
 
 For help getting started with Flutter, view the online [documentation](https://flutter.io/).
 
 ## Usage
 
-You can place your `TimerCountdown` inside of a `Scaffold` or `CupertinoPageScaffold` like we did here. Optional parameters can be defined to enable different features. See the following example..
+You can place your `CountTimer` inside of a `Scaffold` or `CupertinoPageScaffold` like we did here. Optional parameters can be defined to enable different features. See the following example..
 
 ```dart
 import 'package:easy_count_timer/easy_count_timer.dart';
@@ -156,13 +158,12 @@ class CounterDownTimer extends StatelessWidget {
 ```
 
 ## Constructor
-
 #### Basic
 
 | Parameter        | Default           | Description  | Required  |
 | ------------- |:-------------|:-----|:-----:|
-| endtime      | - | Defines the time when the timer is over | true
-| format      | DaysHoursMinutesSeconds | Format for the timer coundtown, choose between different ```CountDownTimerFormat```s | false
+| controller      | - | Defines the controller time when is null time counter `countdown` else `countup`  | false
+| format      | DaysHoursMinutesSeconds | Format for the timer choose between different ```CountTimerFormat```s | false
 | onEnd      | - | Function to call when the timer is over | false
 | enableDescriptions      | - | Toggle time units descriptions | false
 | timeTextStyle      | - | ```TextStyle``` for the time numbers | false
@@ -173,3 +174,41 @@ class CounterDownTimer extends StatelessWidget {
 | minutesDescription      | Minutes | Minutes unit description | false
 | secondsDescription      | Seconds | Seconds unit description | false
 | spacerWidth      | 10 | Defines the width between the colons and the units | false
+
+##### Controller
+
+| Parameter        | Default           | Description  | Required  |
+| ------------- |:-------------|:-----|:-----:|
+| endTime      | - | Defines the time when the timer is over   | false
+
+```dart
+
+  // Create an instance of the Controller used for timer Counter Up
+  var controllerCounterUp = CountTimerController();
+
+  // Start the controller
+  controllerCounterUp.start()
+
+  // Stop the controller
+  controllerCounterUp.stop()
+
+  // Reset the controller
+  controllerCounterUp.reset()
+
+  // Restart the controller
+  controllerCounterUp.restart()
+
+  // Pause the controller
+  controllerCounterUp.pause()
+
+  // // Create an instance of the Controller used for timer Counter Down
+  var controllerCounterDown = CountTimerController(endTime:DateTime.now().add(
+              Duration(
+                days: 5,
+                hours: 14,
+                minutes: 27,
+                seconds: 34,
+              ),
+            ),
+          );
+```

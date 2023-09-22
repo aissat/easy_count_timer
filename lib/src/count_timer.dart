@@ -19,25 +19,99 @@ enum CountTimerFormat {
 }
 
 class CountTimerController extends ChangeNotifier {
+  CountTimerController({this.endTime});
+
   /// Defines the time when the timer is over.
   final DateTime? endTime;
 
-  CountTimerController({this.endTime});
-
-  Timer? _timer;
+  /// The current duration of the timer.
   Duration _duration = Duration.zero;
+
+  /// The duration when the timer is paused.
   Duration _pause = Duration.zero;
 
+  /// Flag indicating if the timer has reached its end.
   bool _isEnd = false;
 
+  /// The timer instance.
+  Timer? _timer;
+
+  /// Returns whether the timer is currently active.
   bool get isActive => _timer != null && _timer!.isActive;
 
+  /// Returns the current duration of the timer.
   Duration get duration => _duration;
+
+  /// Returns whether the timer has reached its end.
+  ///
+  /// Throws an assertion error if [endTime] is not null.
   bool get isEnd {
     assert(endTime == null, 'endTime must be null to get isEnd');
     return _isEnd;
   }
 
+  /// Starts the timer.
+  ///
+  /// Throws an assertion error if [endTime] is not null.
+  void start() {
+    assert(endTime == null, 'endTime must be null to start');
+    if (_timer != null) return;
+    if (_timer == null || !_timer!.isActive) {
+      _startTimer();
+    }
+  }
+
+  /// Stops the timer.
+  ///
+  /// Throws an assertion error if [endTime] is not null.
+  void stop() {
+    assert(endTime == null, 'endTime must be null to stop');
+    if (_timer != null && _timer!.isActive) {
+      _timer?.cancel();
+    }
+    _duration = Duration.zero;
+    _pause = Duration.zero;
+    notifyListeners();
+  }
+
+  /// Resets the timer.
+  ///
+  /// Throws an assertion error if [endTime] is not null.
+  void reset() {
+    assert(endTime == null, 'endTime must be null to reset');
+    _duration = Duration.zero;
+    _pause = Duration.zero;
+    if (_timer != null) {
+      _timer?.cancel();
+    }
+    notifyListeners();
+  }
+
+  /// Restarts the timer.
+  ///
+  /// Throws an assertion error if [endTime] is not null.
+  void restart() {
+    assert(endTime == null, 'endTime must be null to reset');
+    _duration = Duration.zero;
+    _pause = Duration.zero;
+    if (_timer != null) {
+      _timer?.cancel();
+      start();
+    }
+    notifyListeners();
+  }
+
+  /// Pauses the timer.
+  ///
+  /// Throws an assertion error if [endTime] is not null.
+  void pause() {
+    assert(endTime == null, 'endTime must be null to pause');
+    debugPrint('CountTimerController start Duration: ${_duration.inSeconds}');
+    _timer?.cancel();
+    _pause = _duration;
+  }
+
+  /// Helper method to start the timer.
   void _startTimer() {
     if (endTime == null || endTime!.isBefore(DateTime.now())) {
       _duration = _duration;
@@ -61,52 +135,6 @@ class CountTimerController extends ChangeNotifier {
         notifyListeners();
       }
     });
-  }
-
-  void start() {
-    assert(endTime == null, 'endTime must be null to start');
-    if (_timer != null) return;
-    if (_timer == null || !_timer!.isActive) {
-      _startTimer();
-    }
-  }
-
-  void stop() {
-    assert(endTime == null, 'endTime must be null to stop');
-    if (_timer != null && _timer!.isActive) {
-      _timer?.cancel();
-    }
-    _duration = Duration.zero;
-    _pause = Duration.zero;
-    notifyListeners();
-  }
-
-  void reset() {
-    assert(endTime == null, 'endTime must be null to reset');
-    _duration = Duration.zero;
-    _pause = Duration.zero;
-    if (_timer != null) {
-      _timer?.cancel();
-    }
-    notifyListeners();
-  }
-
-  void restart() {
-    assert(endTime == null, 'endTime must be null to reset');
-    _duration = Duration.zero;
-    _pause = Duration.zero;
-    if (_timer != null) {
-      _timer?.cancel();
-      start();
-    }
-    notifyListeners();
-  }
-
-  void puase() {
-    assert(endTime == null, 'endTime must be null to puase');
-    debugPrint('CountTimerController start Duartion: ${_duration.inSeconds}');
-    _timer?.cancel();
-    _pause = _duration;
   }
 
   @override
